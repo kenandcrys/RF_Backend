@@ -8,18 +8,16 @@ const sharedConfig = {
   seeds: {
     directory: './data/seeds',
   },
-  // this enables foreign keys in SQLite
   pool: {
     afterCreate: (conn, done) => {
-      conn.run('PRAGMA foreign_keys = ON', done)
+      conn.run('PRAGMA foreign_keys = ON', done);
     },
   },
-}
+};
 
 module.exports = {
   development: {
     ...sharedConfig,
-    client: "sqlite3",
     connection: { filename: './data/Feed.db3' },
   },
   testing: {
@@ -27,20 +25,23 @@ module.exports = {
     connection: { filename: './data/testing.db3' },
   },
   production: {
-    client: 'postgres',
-    seederStorage: 'sequelize',
-    dialectOptions: {
-      ssl: {
-        require: true,
-        rejectUnauthorized: false
-      }
-    },
+    client: 'pg', // Changed from 'postgres' to 'pg'
     connection: {
       host: 'dpg-cscja8o8fa8c7382mei0-a',
       port: 5432,
       database: 'rf_feeds',
       user: 'redneck_user',
       password: 'hy27mEaqr8Q2TdxeLNK7noZbFOk5tfIW',
-    }
-  }
+      ssl: {
+        require: true,
+        rejectUnauthorized: false,
+      },
+    },
+    migrations: {
+      directory: './data/migrations', // Optional: specify migrations directory
+    },
+    seeds: {
+      directory: './data/seeds', // Optional: specify seeds directory
+    },
+  },
 };
