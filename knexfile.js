@@ -25,7 +25,7 @@ module.exports = {
     connection: { filename: './data/testing.db3' },
   },
   production: {
-    client: 'pg', // Changed from 'postgres' to 'pg'
+    client: 'postgres', // Changed from 'postgres' to 'pg'
     connection: {
       host: 'dpg-cscja8o8fa8c7382mei0-a',
       port: 5432,
